@@ -21,8 +21,8 @@ Note: If you mention a custom website, certificates will be created based on the
 
 sudo sed -e '/cluster.initial_master_nodes/ s/^#*/#/' -i /etc/elasticsearch/elasticsearch.yml
 echo "discovery.type: single-node" | sudo tee -a /etc/elasticsearch/elasticsearch.yml
-First command comments cluster.initial_master_nodes.
-Second one sets the single-node functionality
+######First command comments cluster.initial_master_nodes.
+######Second one sets the single-node functionality
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ sudo apt install kibana
 # Add keys to /etc/kibana/kibana.yml
 sudo /usr/share/kibana/bin/kibana-encryption-keys generate -q
 
-Optional for custom-website:[Nothing to run for localhost]
+*******Optional for custom-website:[Nothing to run for localhost]*******
 echo "server.host: \"kali-purple.kali.purple\"" | sudo tee -a /etc/kibana/kibana.yml
 # Ensure kli-purple.kali.purple is only mapped to 192.168.253.5 in /etc/hosts in order to bind Kibana to custom-URL interface
 
@@ -54,7 +54,7 @@ Enter verification code into Kibana when prompted
 
 —-----------------------------------------OPTIONAL Based on server-setup—--------------------------------------------------
 ######----------------Enable HTTPS for Kibana------------------######
-# --------------------------
+ --------------------------
 /usr/share/elasticsearch/bin/elasticsearch-certutil ca
 /usr/share/elasticsearch/bin/elasticsearch-certutil cert --ca elastic-stack-ca.p12 --dns kali-purple.kali.purple,elastic.kali.purple,kali-purple --out kibana-server.p12
 sudo openssl pkcs12 -in /usr/share/elasticsearch/kibana-server.p12 -out /etc/kibana/kibana-server.crt -clcerts -nokeys
