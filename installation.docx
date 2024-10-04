@@ -44,8 +44,7 @@ sudo systemctl enable elasticsearch kibana --now
 
 sudo /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
 Open browser and navigate to
-http://(localhost
-or custom-IP):5601
+http://localhost:5601   OR http://custom-IP:5601
 Enter username=elastic and password as displayed after installation
 Paste token from above
 sudo /usr/share/kibana/bin/kibana-verification-code
