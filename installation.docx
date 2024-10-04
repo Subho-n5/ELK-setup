@@ -1,4 +1,5 @@
-1. Install elasticsearch:
+###############################--------------1. Install elasticsearch--------------------##################################
+
 sudo apt-get install curl
 curl -fsSL
 https://artifacts.elastic.co/GPG-KEY-elasticsearch
@@ -12,13 +13,24 @@ For installing as some custom website(e.g. kali-purple.kali.purple)-
 sudo bash -c "export HOSTNAME=kali-purple.kali.purple; apt-get install elasticsearch -y"
 Note: If you mention a custom website, certificates will be created based on the website name.
 # Take note of "elastic" user password and other security details
-2. Convert to single-node setup (or replace fqdn name in initial_master_nodes list with IP address):[This is done for resource efficiency and optional]
+
+---------------------------------------------------------------------------------------------------------------------------
+
+###############################--------------2. Convert to single-node setup--------------------#################################
+
+ (or replace fqdn name in initial_master_nodes list with IP address):
+
+*************[This is done for resource efficiency and optional]*************
+
 sudo sed -e '/cluster.initial_master_nodes/ s/^#*/#/' -i /etc/elasticsearch/elasticsearch.yml
 echo "discovery.type: single-node" | sudo tee -a /etc/elasticsearch/elasticsearch.yml
 First command comments cluster.initial_master_nodes.
 Second one sets the single-node functionality
 
-3. Install Kibana:
+---------------------------------------------------------------------------------------------------------------------------
+
+###############################--------------3. Install Kibana--------------------##################################
+
 sudo apt install kibana
 # Add keys to /etc/kibana/kibana.yml
 sudo /usr/share/kibana/bin/kibana-encryption-keys generate -q
@@ -28,7 +40,11 @@ echo "server.host: \"kali-purple.kali.purple\"" | sudo tee -a /etc/kibana/kibana
 # Ensure kli-purple.kali.purple is only mapped to 192.168.253.5 in /etc/hosts in order to bind Kibana to custom-URL interface
 
 sudo systemctl enable elasticsearch kibana --now
-4. Enroll Kibana:
+
+---------------------------------------------------------------------------------------------------------------------------
+
+###############################--------------4. Enroll Kibana--------------------##################################
+
 sudo /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
 Open browser and navigate to
 http://(localhost
@@ -37,9 +53,10 @@ Enter username=elastic and password as displayed after installation
 Paste token from above
 sudo /usr/share/kibana/bin/kibana-verification-code
 Enter verification code into Kibana when prompted
+---------------------------------------------------------------------------------------------------------------------------
 
-—-----------------OPTIONAL Based on server-setup—------------
-4.Enable HTTPS for Kibana:
+—-----------------------------------------OPTIONAL Based on server-setup—--------------------------------------------------
+######----------------Enable HTTPS for Kibana------------------######
 # --------------------------
 /usr/share/elasticsearch/bin/elasticsearch-certutil ca
 /usr/share/elasticsearch/bin/elasticsearch-certutil cert --ca elastic-stack-ca.p12 --dns kali-purple.kali.purple,elastic.kali.purple,kali-purple --out kibana-server.p12
