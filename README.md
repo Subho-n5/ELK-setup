@@ -10,3 +10,4 @@
 
 **For installing as some custom website (e.g., kali-purple.kali.purple)**
 > sudo bash -c "export HOSTNAME=kali-purple.kali.purple; apt-get install elasticsearch -y"
+
